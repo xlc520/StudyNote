@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>宝塔面板v7.7.0-解锁Nginx防火墙及网站监控报表-绕过绑定账号 | StudyNote</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    <link rel="icon" href="/StudyNote/static/img/favicon.svg">
+    <meta name="description" content="一个自己学习的笔记，学习工具，各种技巧，各种使用教程。">
+    
+    <link rel="preload" href="/StudyNote/assets/css/0.styles.d1de9e62.css" as="style"><link rel="preload" href="/StudyNote/assets/js/app.47fccaa7.js" as="script"><link rel="preload" href="/StudyNote/assets/js/2.704b11ee.js" as="script"><link rel="preload" href="/StudyNote/assets/js/22.9703a15a.js" as="script"><link rel="prefetch" href="/StudyNote/assets/js/10.c5c2484c.js"><link rel="prefetch" href="/StudyNote/assets/js/11.2d97b6d5.js"><link rel="prefetch" href="/StudyNote/assets/js/12.f4c0cd9b.js"><link rel="prefetch" href="/StudyNote/assets/js/13.73cf7be7.js"><link rel="prefetch" href="/StudyNote/assets/js/14.e67d0944.js"><link rel="prefetch" href="/StudyNote/assets/js/15.8b59f259.js"><link rel="prefetch" href="/StudyNote/assets/js/16.1b5f5b27.js"><link rel="prefetch" href="/StudyNote/assets/js/17.59bab2a7.js"><link rel="prefetch" href="/StudyNote/assets/js/18.5ab691c9.js"><link rel="prefetch" href="/StudyNote/assets/js/19.20a7e413.js"><link rel="prefetch" href="/StudyNote/assets/js/20.830d2a50.js"><link rel="prefetch" href="/StudyNote/assets/js/21.279c9c75.js"><link rel="prefetch" href="/StudyNote/assets/js/23.a97ee86d.js"><link rel="prefetch" href="/StudyNote/assets/js/24.4e0ca9b6.js"><link rel="prefetch" href="/StudyNote/assets/js/25.5293f274.js"><link rel="prefetch" href="/StudyNote/assets/js/26.ac5a909b.js"><link rel="prefetch" href="/StudyNote/assets/js/27.b41cb965.js"><link rel="prefetch" href="/StudyNote/assets/js/28.bc891a27.js"><link rel="prefetch" href="/StudyNote/assets/js/29.758559bd.js"><link rel="prefetch" href="/StudyNote/assets/js/3.11e5a9bf.js"><link rel="prefetch" href="/StudyNote/assets/js/30.414d228b.js"><link rel="prefetch" href="/StudyNote/assets/js/31.5143db40.js"><link rel="prefetch" href="/StudyNote/assets/js/4.16415e53.js"><link rel="prefetch" href="/StudyNote/assets/js/5.9eae2ab8.js"><link rel="prefetch" href="/StudyNote/assets/js/6.5abf2f51.js"><link rel="prefetch" href="/StudyNote/assets/js/7.864343b7.js"><link rel="prefetch" href="/StudyNote/assets/js/8.90c3c27e.js"><link rel="prefetch" href="/StudyNote/assets/js/9.3e0a2494.js">
+    <link rel="stylesheet" href="/StudyNote/assets/css/0.styles.d1de9e62.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/StudyNote/" class="home-link router-link-active"><img src="/StudyNote/static/img/favicon.svg" alt="StudyNote" class="logo"> <span class="site-name can-hide">StudyNote</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/StudyNote/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/StudyNote/study/" class="nav-link">
+  学习
+</a></div><div class="nav-item"><a href="/StudyNote/idea/" class="nav-link">
+  IDEA
+</a></div><div class="nav-item"><a href="/StudyNote/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/StudyNote/script/" class="nav-link">
+  脚本
+</a></div><div class="nav-item"><a href="/StudyNote/tools/" class="nav-link">
+  工具
+</a></div><div class="nav-item"><a href="/StudyNote/source_code/" class="nav-link">
+  源码
+</a></div><div class="nav-item"><a href="/StudyNote/git/" class="nav-link">
+  Git
+</a></div> <a href="https://github.com/xlc520/StudyNote" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/StudyNote/" class="nav-link">
+  Home
+</a></div><div class="nav-item"><a href="/StudyNote/study/" class="nav-link">
+  学习
+</a></div><div class="nav-item"><a href="/StudyNote/idea/" class="nav-link">
+  IDEA
+</a></div><div class="nav-item"><a href="/StudyNote/linux/" class="nav-link router-link-active">
+  Linux
+</a></div><div class="nav-item"><a href="/StudyNote/script/" class="nav-link">
+  脚本
+</a></div><div class="nav-item"><a href="/StudyNote/tools/" class="nav-link">
+  工具
+</a></div><div class="nav-item"><a href="/StudyNote/source_code/" class="nav-link">
+  源码
+</a></div><div class="nav-item"><a href="/StudyNote/git/" class="nav-link">
+  Git
+</a></div> <a href="https://github.com/xlc520/StudyNote" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><a href="/StudyNote/linux/" aria-current="page" class="sidebar-link">123</a></li><li><a href="/StudyNote/linux/Centos7Minimal.html" class="sidebar-link">Centos7 Minimal 安装后初始化配置</a></li><li><a href="/StudyNote/linux/bt.html" aria-current="page" class="active sidebar-link">宝塔面板v7.7.0-解锁Nginx防火墙及网站监控报表-绕过绑定账号</a></li><li><a href="/StudyNote/linux/NodeJS-Maven-Mysql.html" class="sidebar-link">安装NodeJS-Maven-Mysql</a></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="宝塔面板v7-7-0-解锁nginx防火墙及网站监控报表-绕过绑定账号"><a href="#宝塔面板v7-7-0-解锁nginx防火墙及网站监控报表-绕过绑定账号" class="header-anchor">#</a> 宝塔面板v7.7.0-解锁Nginx防火墙及网站监控报表-绕过绑定账号</h1> <p>测试环境：Ubuntu / Debian / CentOS
+测试时间：2021-12-20
+宝塔版本： 7.7.0
+仅测试了Nginx防火墙及网站监控报表两款插件，其它收费插件未测试
+其它系统及版本未进行测试，请自行验证，请勿在生产环境下进行测试！
+注意：修改代码后需要重启面板服务才能使其生效，如果面板出现乱码重启服务器即可；</p> <p>解锁所有付费插件为永不过期</p> <p>文件路径：www/server/panel/data/plugin.json
+搜索字符串：&quot;endtime&quot;: -1 全部替换为 &quot;endtime&quot;: 999999999999
+显示永久专业版或企业版标识</p> <p>文件路径：www/server/panel/data/plugin.json
+查找字符串：name&quot;: &quot;coll_admin&quot;，将panel_pro或panel_ltd后面的-1改为0
+禁止解锁插件后自动修复为免费版</p> <p>文件路径：www/server/panel/data/repair.json
+查找字符串：&quot;id&quot;: 16，将这段修复权限的代码删除
+禁止宝塔面板检测升级，防止失效</p> <p>文件路径：www/server/panel/data/plugin.json
+查找字符串：name&quot;: &quot;coll_admin&quot;，将这段里的update_mgs删除或者改为null
+下面是2021/08/24的方法，上面是最新的
+修改后不能使用问题：如果修改后出现软件中心页面空白，那是因为代码位置有问题，可以参考下面示例图代码位置 位置一定要一致
+开始
+打开目录/www/server/panel/class找到并编辑panelplugin.py文件
+使用Ctrl+F搜索并找到softList['list'] = tmpList这段代码，在其下方添加如下代码：</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code>                softList<span class="token punctuation">[</span><span class="token string">'pro'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">1</span>
+        <span class="token keyword">for</span> soft <span class="token keyword">in</span> softList<span class="token punctuation">[</span><span class="token string">'list'</span><span class="token punctuation">]</span><span class="token punctuation">:</span>
+            soft<span class="token punctuation">[</span><span class="token string">'endtime'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token number">0</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>示例：
+<img src="bt_files/2.png" alt=""></p> <p>修改完成后重启面板，重启完成后就可以直接安装收费的插件了，Nginx防火墙也可以直接安装使用</p> <p>网站监控报表
+如果需要使用网站监控报表还需另外修改一次代码：
+安装好网站监控报表插件后打开/www/server/panel/plugin/total目录并编辑total_main.py文件
+使用Ctrl+F搜索并找到if 'bt_total' in session: return public.returnMsg(True,'OK!');这段代码
+在这段代码前加上#将其注释掉，并在其下方加入以下代码：</p> <div class="language-python line-numbers-mode"><pre class="language-python"><code>        session<span class="token punctuation">[</span><span class="token string">'bt_total'</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token boolean">True</span>
+        <span class="token keyword">return</span> public<span class="token punctuation">.</span>returnMsg<span class="token punctuation">(</span><span class="token boolean">True</span><span class="token punctuation">,</span><span class="token string">'OK!'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>示例：
+<img src="bt_files/1.png" alt=""></p> <p>然后再次重启面板，即可使用网站监控报表插件了；</p> <p>一键消除宝塔的强制登录方法简单粗暴，但是非常有效~</p> <p>复制该命令到终端运行即可：<code>rm -f /www/server/panel/data/bind.pl</code></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/xlc520/StudyNote/edit/main/docs/linux/bt.md" target="_blank" rel="noopener noreferrer">在 GitHub 上编辑此页</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/StudyNote/linux/Centos7Minimal.html" class="prev">
+        Centos7 Minimal 安装后初始化配置
+      </a></span> <span class="next"><a href="/StudyNote/linux/NodeJS-Maven-Mysql.html">
+        安装NodeJS-Maven-Mysql
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><canvas id="vuepress-canvas-cursor"></canvas><!----></div></div>
+    <script src="/StudyNote/assets/js/app.47fccaa7.js" defer></script><script src="/StudyNote/assets/js/2.704b11ee.js" defer></script><script src="/StudyNote/assets/js/22.9703a15a.js" defer></script>
+  </body>
+</html>
